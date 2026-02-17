@@ -22,7 +22,13 @@ const Navbar = ({ theme, toggleTheme }) => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="logo">{COMPANY_INFO.name}</div>
+      <a 
+        href="#home" 
+        className="logo" 
+        onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); }}
+      >
+        {COMPANY_INFO.name}
+      </a>
       <div className={`nav-links ${isOpen ? 'open' : ''}`}>
         <a href="#home" onClick={() => setIsOpen(false)}>Home</a>
         <a href="#fleet" onClick={() => setIsOpen(false)}>Our Fleet</a>
@@ -30,13 +36,15 @@ const Navbar = ({ theme, toggleTheme }) => {
         <a href="#packages" onClick={() => setIsOpen(false)}>Packages</a>
         <a href="#tours" onClick={() => setIsOpen(false)}>Tours</a>
         <a href="#why-choose-us" onClick={() => setIsOpen(false)}>Why Us</a>
+      </div>
+      <div className="nav-actions">
         <a href="#contact" onClick={() => setIsOpen(false)} className="btn-nav">Book Now</a>
         <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle Theme">
           {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
         </button>
-      </div>
-      <div className="menu-icon" onClick={toggleIsOpen}>
-        {isOpen ? <X /> : <Menu />}
+        <div className="menu-icon" onClick={toggleIsOpen}>
+          {isOpen ? <X /> : <Menu />}
+        </div>
       </div>
     </nav>
   );

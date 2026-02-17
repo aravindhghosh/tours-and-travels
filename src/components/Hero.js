@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ChevronRight } from 'lucide-react';
-import { HERO_CONTENT, COMPANY_INFO, HERO_BACKGROUNDS } from '../data/travelData';
+import { HERO_CONTENT, HERO_BACKGROUNDS } from '../data/travelData';
+import logo from '../assets/images/logo.png';
+
+// Helper to handle Webpack image imports which might be strings or objects
+const getImgUrl = (img) => {
+  if (!img) return '';
+  return typeof img === 'string' ? img : img.default;
+};
 
 const Hero = ({ theme }) => {
-  // Helper to handle Webpack image imports which might be strings or objects
-  const getImgUrl = (img) => {
-    if (!img) return '';
-    return typeof img === 'string' ? img : img.default;
-  };
+  useEffect(() => {
+    const link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      const newLink = document.createElement('link');
+      newLink.rel = 'icon';
+      newLink.href = getImgUrl(logo);
+      document.head.appendChild(newLink);
+    } else {
+      link.href = getImgUrl(logo);
+    }
+  }, []);
 
   return (
   <section id="home" className="hero" style={{ 
     backgroundImage: `url(${getImgUrl(theme === 'light' ? HERO_BACKGROUNDS.light : HERO_BACKGROUNDS.dark)})`,
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center 20%'
   }}>
     <div className="hero-scene">
       {/* Road & 3D Vehicle */}
@@ -24,7 +37,6 @@ const Hero = ({ theme }) => {
               <div className="van-side left"></div>
               <div className="van-side right">
                   <div className="van-window"></div>
-                  <div className="van-text">{COMPANY_INFO.shortName}</div>
               </div>
               <div className="van-top"></div>
               <div className="van-front">
@@ -41,8 +53,6 @@ const Hero = ({ theme }) => {
       </div>
     </div>
     <div className="hero-content">
-      <h1>{HERO_CONTENT.title}</h1>
-      <p>{HERO_CONTENT.subtitle}</p>
       <a href="#contact" className="btn-primary">{HERO_CONTENT.ctaText} <ChevronRight size={20} /></a>
     </div>
   </section>
