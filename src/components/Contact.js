@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Calendar, Facebook, Instagram } from 'lucide-react';
+import { Phone, Calendar, Facebook, Instagram, MessageCircle } from 'lucide-react';
 import { CONTACT_INFO, SOCIAL_LINKS, FLEET_DATA, TRIP_TYPES, PACKAGES_DATA } from '../data/travelData';
 
 const Contact = ({ selectedPackage }) => {
@@ -54,21 +54,30 @@ const Contact = ({ selectedPackage }) => {
           <h3>{CONTACT_INFO.title}</h3>
           <p>{CONTACT_INFO.subtitle}</p>
           <div className="info-item">
-            <Phone className="icon-blue" /> <span>{CONTACT_INFO.phone}</span>
+            <Phone className="icon-blue" />
+            <div>
+              <div style={{ marginBottom: '0.2rem' }}>{CONTACT_INFO.primaryPhone} <span style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>(Primary)</span></div>
+              <div>{CONTACT_INFO.secondaryPhone} <span style={{ fontSize: '0.8em', color: 'var(--text-muted)' }}>(Secondary)</span></div>
+            </div>
+          </div>
+          <div className="info-item">
+            <MessageCircle className="icon-green" />
+            <a href={`https://wa.me/${CONTACT_INFO.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', fontWeight: 'bold' }}>
+              Chat on WhatsApp
+            </a>
           </div>
           <div className="info-item">
             <Calendar className="icon-blue" /> <span>{CONTACT_INFO.availability}</span>
           </div>
           <div className="social-links">
             <p>Follow us on:</p>
-            <a href={SOCIAL_LINKS.facebook} className="social-icon"><Facebook /></a>
-            <a href={SOCIAL_LINKS.instagram} className="social-icon"><Instagram /></a>
+            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="social-icon"><Facebook /></a>
+            <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="social-icon"><Instagram /></a>
           </div>
         </div>
         <form className="contact-form" onSubmit={handleSubmit}>
           <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} required />
           <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} required />
-          <input type="number" name="people" placeholder="No. of People" min="1" value={formData.people} onChange={handleChange} required />
           <select name="vehicle" value={formData.vehicle} onChange={handleChange}>
             <option>Select Vehicle</option>
             {filteredFleet.map(vehicle => (
@@ -87,6 +96,7 @@ const Contact = ({ selectedPackage }) => {
               <option key={pkg.id} value={pkg.title}>{pkg.title}</option>
             ))}
           </select>
+          <input type="number" name="people" placeholder="No. of People" min="1" value={formData.people} onChange={handleChange} required />
           <button type="submit" className="btn-primary">Send Inquiry</button>
         </form>
       </div>

@@ -8,6 +8,8 @@ import WhyChooseUs from './components/WhyChooseUs';
 import Packages from './components/Packages';
 import PreviousTours from './components/PreviousTours';
 import Testimonials from './components/Testimonials';
+import Gallery from './components/Gallery';
+import VideoSection from './components/VideoSection';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -45,6 +47,8 @@ function App() {
       <Services />
       <Packages onBookPackage={setBookingPackage} />
       <PreviousTours />
+      <Gallery />
+      <VideoSection />
       <WhyChooseUs />
       <Testimonials />
       <Contact selectedPackage={bookingPackage} />

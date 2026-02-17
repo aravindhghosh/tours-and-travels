@@ -35,6 +35,8 @@ const Navbar = ({ theme, toggleTheme }) => {
         <a href="#services" onClick={() => setIsOpen(false)}>Services</a>
         <a href="#packages" onClick={() => setIsOpen(false)}>Packages</a>
         <a href="#tours" onClick={() => setIsOpen(false)}>Tours</a>
+        <a href="#gallery" onClick={() => setIsOpen(false)}>Gallery</a>
+        <a href="#video" onClick={() => setIsOpen(false)}>Video</a>
         <a href="#why-choose-us" onClick={() => setIsOpen(false)}>Why Us</a>
       </div>
       <div className="nav-actions">

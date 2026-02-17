@@ -22,7 +22,9 @@ export const HERO_BACKGROUNDS = {
 };
 
 export const CONTACT_INFO = {
-  phone: "+91 98765 43210",
+  primaryPhone: "+91 98765 43210",
+  secondaryPhone: "+91 98765 43211",
+  whatsapp: "+91 98765 43210",
   availability: "Available 24/7",
   title: "Get in Touch",
   subtitle: "Ready for your spiritual journey or family vacation? Call us today."
