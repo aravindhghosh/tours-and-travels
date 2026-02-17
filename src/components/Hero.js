@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { ChevronRight } from 'lucide-react';
-import { HERO_CONTENT, HERO_BACKGROUNDS } from '../data/travelData';
-import logo from '../assets/images/logo.png';
+import { HERO_CONTENT, HERO_BACKGROUNDS, LOGO } from '../data/travelData';
 
 // Helper to handle Webpack image imports which might be strings or objects
 const getImgUrl = (img) => {
@@ -15,10 +14,10 @@ const Hero = ({ theme }) => {
     if (!link) {
       const newLink = document.createElement('link');
       newLink.rel = 'icon';
-      newLink.href = getImgUrl(logo);
+      newLink.href = getImgUrl(LOGO);
       document.head.appendChild(newLink);
     } else {
-      link.href = getImgUrl(logo);
+      link.href = getImgUrl(LOGO);
     }
   }, []);
 
@@ -53,6 +52,7 @@ const Hero = ({ theme }) => {
       </div>
     </div>
     <div className="hero-content">
+      <img src={getImgUrl(LOGO)} alt="Natarajan Travels" className="hero-logo" />
       <a href="#contact" className="btn-primary">{HERO_CONTENT.ctaText} <ChevronRight size={20} /></a>
     </div>
   </section>

@@ -3,12 +3,20 @@ import { Star, Users, MapPin, ShieldCheck, Clock, HeartHandshake, BadgeIndianRup
 
 import bgLight from '../assets/images/bg_hero/bg_hero_lighttheme.png';
 import bgDark from '../assets/images/bg_hero/bg_hero_darktheme.png';
+import logo from '../assets/images/logo.png';
+
+const processImage = (img) => {
+  if (!img) return '';
+  return typeof img === 'string' ? img : img.default;
+};
 
 export const COMPANY_INFO = {
   name: "Natarajan Tours and Travels",
   shortName: "Natarajan",
   copyrightText: "Safe & Secure Journeys."
 };
+
+export const LOGO = processImage(logo);
 
 export const HERO_CONTENT = {
   title: "Your Journey, Our Responsibility",
@@ -282,3 +290,34 @@ export const PREVIOUS_TOURS_DATA = [
     location: "Palani, Tamil Nadu"
   }
 ];
+
+export const VIDEO_SECTION_CONTENT = {
+  title: "Watch Our Tours",
+  subtitle: "Experience the journey before you book.",
+  videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+};
+
+const getGalleryImages = () => {
+  let images = [];
+  try {
+    const r = require.context('../assets/images/gallery', false, /\.(png|jpe?g|svg)$/);
+    images = r.keys().map(item => { const img = r(item); return img.default || img; });
+  } catch (e) {
+    console.warn("Gallery folder missing or empty. Using placeholders.");
+  }
+
+  if (images.length === 0) {
+    return [
+      "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=600",
+      "https://images.unsplash.com/photo-1606210122158-eeb10e0823bf?auto=format&fit=crop&q=80&w=600",
+      "https://images.unsplash.com/photo-1590053165868-2d8099525763?auto=format&fit=crop&q=80&w=600",
+      "https://images.unsplash.com/photo-1518182170546-0766ba6f6a56?auto=format&fit=crop&q=80&w=600",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=600",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=600"
+    ];
+  }
+
+  return images.sort(() => 0.5 - Math.random());
+};
+
+export const GALLERY_IMAGES = getGalleryImages();

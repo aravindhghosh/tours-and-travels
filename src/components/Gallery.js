@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { GALLERY_IMAGES } from '../data/travelData';
 
 const Gallery = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
@@ -8,24 +9,7 @@ const Gallery = () => {
   const [touchEnd, setTouchEnd] = useState(null);
 
   // Load and shuffle images once on mount
-  const [images] = useState(() => {
-    let loadedImages = [];
-    try {
-      const r = require.context('../assets/images/gallery', false, /\.(png|jpe?g|svg)$/);
-      loadedImages = r.keys().map(item => { const img = r(item); return img.default || img; });
-    } catch (e) {
-      console.warn("Gallery images not found, using placeholders.");
-      loadedImages = [
-        "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1606210122158-eeb10e0823bf?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1590053165868-2d8099525763?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1518182170546-0766ba6f6a56?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=600",
-        "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=600"
-      ];
-    }
-    return loadedImages.sort(() => 0.5 - Math.random());
-  });
+  const [images] = useState(GALLERY_IMAGES);
 
   const openModal = (index) => {
     setSelectedImageIndex(index);

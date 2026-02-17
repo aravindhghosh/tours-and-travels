@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useToggle } from '../hooks/useToggle';
-import { COMPANY_INFO } from '../data/travelData';
+import { COMPANY_INFO, LOGO } from '../data/travelData';
 
 const Navbar = ({ theme, toggleTheme }) => {
   const [isOpen, toggleIsOpen, setIsOpen] = useToggle(false);
@@ -27,6 +27,7 @@ const Navbar = ({ theme, toggleTheme }) => {
         className="logo" 
         onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); }}
       >
+        <img src={LOGO} alt="Logo" className="nav-logo-img" />
         {COMPANY_INFO.name}
       </a>
       <div className={`nav-links ${isOpen ? 'open' : ''}`}>
