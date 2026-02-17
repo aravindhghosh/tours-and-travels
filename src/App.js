@@ -1,23 +1,54 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Fleet from './components/Fleet';
+import Services from './components/Services';
+import WhyChooseUs from './components/WhyChooseUs';
+import Packages from './components/Packages';
+import PreviousTours from './components/PreviousTours';
+import Testimonials from './components/Testimonials';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
+  const [bookingPackage, setBookingPackage] = useState(null);
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const sections = document.querySelectorAll('section');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`App ${theme}`}>
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Hero theme={theme} />
+      <Fleet />
+      <Services />
+      <Packages onBookPackage={setBookingPackage} />
+      <PreviousTours />
+      <WhyChooseUs />
+      <Testimonials />
+      <Contact selectedPackage={bookingPackage} />
+      <Footer />
     </div>
   );
 }
